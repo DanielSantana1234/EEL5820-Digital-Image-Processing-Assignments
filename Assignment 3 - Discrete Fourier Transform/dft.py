@@ -22,7 +22,7 @@ def dft(width, height):
             for x in range(width):
                 for y in range(height):
                     # The Fourier Transform
-                    current_pixels = float(img.getpixel((x, y)))
+                    current_pixels = float(img.getpixel((x, y))) * ((-1) ** (x + y))
                     theta = (-2 * math.pi) * (((u*x)/width) + ((v*y)/height))
                     euler_exponential = complex(math.cos(theta), math.sin(theta))
 
