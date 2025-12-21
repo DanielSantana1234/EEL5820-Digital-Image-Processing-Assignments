@@ -2,19 +2,15 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 import math
+import time
 
-image_path = "Assignment 3 - Discrete Fourier Transform/128_lena_gray.bmp"
+image_path = "Images/Synthetic/128_synthetic.bmp"
 img = Image.open(image_path)
 width, height = img.size
 fourier_image = Image.new("L", img.size, 0xffffff)
 
-# Transform the image to the Fourier domain 
-# Time the amount of time it takes to transfer 
-# Just center the image 
-# Be able to display it 
-# Then inverse the transform and display it back again 
-
 def dft(width, height):
+    start = time.time()
     F = np.zeros((height, width), dtype=np.complex128)
     for u in range(width):
         for v in range(height):
@@ -28,8 +24,10 @@ def dft(width, height):
 
                     term = current_pixels * euler_exponential
                     current = current + term
-    # Trying to fix being able to put "current" into the .putpixel() method to fix
             F[v, u] = current
+    end = time.time()
+    print("The time it took the DFT is ", end - start, " seconds")
+
     magnitude_spectrum = np.abs(F)
     log_magnitude = np.log1p(magnitude_spectrum)
 
